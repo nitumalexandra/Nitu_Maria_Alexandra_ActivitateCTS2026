@@ -3,6 +3,9 @@ package program;
 import supe.*;
 import rezervare.*;
 import feluri.*;
+import clienti.*;
+import adapter.*;
+import facade.*;
 
 public class Program {
 
@@ -38,5 +41,19 @@ public class Program {
 
         f1.afis();
         f2.afis();
+
+        Client c1 = new Client("Ana", "0711111111", "ana@gmail.com", "Bucuresti");
+        Client c2 = (Client) c1.copiaza();
+
+        System.out.println(c1);
+        System.out.println(c2);
+
+        SoftPrintareBucatarie softVechi = new SoftPrintareBucatarie();
+        ISoftBar softNou = new AdapterBarPrintare(softVechi);
+        softNou.printeazaNota(45.5f);
+
+        FacadeRestaurant facade = new FacadeRestaurant();
+        boolean rezultat = facade.verificaMasa(3);
+        System.out.println("Masa pregatita: " + rezultat);
     }
 }
