@@ -21,18 +21,13 @@ public class Program {
         s2.afis();
         s3.afis();
 
-        Rezervare r1 = new BuilderRezervare("Ana")
-                .setGeam(true)
-                .setDecor(true)
-                .build();
-
-        Rezervare r2 = new BuilderRezervare("Ion")
-                .setScaun(true)
-                .setMuzica(true)
-                .build();
-
+        Rezervare r1 = new Rezervare("Ana", true, true, false, true, 4);  // Se va confirma
         System.out.println(r1);
+        r1.confirmare();
+
+        Rezervare r2 = new Rezervare("Ion", true, true, true, false, 5); // Se va confirma
         System.out.println(r2);
+        r2.confirmare();
 
         FactoryFelMancare factory = new FactoryFelMancare();
 
@@ -55,5 +50,22 @@ public class Program {
         FacadeRestaurant facade = new FacadeRestaurant();
         boolean rezultat = facade.verificaMasa(3);
         System.out.println("Masa pregatita: " + rezultat);
+
+        NotaDePlata nota = new NotaDePlata("Ana", 100.5f);
+        nota.afisare();
+
+        SectiuneMeniu startere = new SectiuneMeniu("Startere");
+        startere.adaugaSubsectiune(new ItemMeniu("Supa de legume", 15.5f));
+        startere.adaugaSubsectiune(new ItemMeniu("Supa de pui", 17f));
+
+        SectiuneMeniu deserturi = new SectiuneMeniu("Deserturi");
+        deserturi.adaugaSubsectiune(new ItemMeniu("Papanasi", 20f));
+        deserturi.adaugaSubsectiune(new ItemMeniu("Cheesecake", 22f));
+
+        SectiuneMeniu meniu = new SectiuneMeniu("Meniu Restaurant");
+        meniu.adaugaSubsectiune(startere);
+        meniu.adaugaSubsectiune(deserturi);
+
+        meniu.afisare();
     }
 }
