@@ -21,11 +21,14 @@ public class Program {
         s2.afis();
         s3.afis();
 
-        Rezervare r1 = new Rezervare("Ana", true, true, false, true, 4);  // Se va confirma
+        Client c1 = Client.getClient("Ana", "0711111111", "ana@gmail.com", "Bucuresti");
+        Client c2 = Client.getClient("Ion", "0722222222", "ion@gmail.com", "Cluj");
+
+        Rezervare r1 = new Rezervare(c1, true, true, false, true, 4);
         System.out.println(r1);
         r1.confirmare();
 
-        Rezervare r2 = new Rezervare("Ion", true, true, true, false, 5); // Se va confirma
+        Rezervare r2 = new Rezervare(c2, true, true, true, false, 5);
         System.out.println(r2);
         r2.confirmare();
 
@@ -36,12 +39,6 @@ public class Program {
 
         f1.afis();
         f2.afis();
-
-        Client c1 = new Client("Ana", "0711111111", "ana@gmail.com", "Bucuresti");
-        Client c2 = (Client) c1.copiaza();
-
-        System.out.println(c1);
-        System.out.println(c2);
 
         SoftPrintareBucatarie softVechi = new SoftPrintareBucatarie();
         ISoftBar softNou = new AdapterBarPrintare(softVechi);
