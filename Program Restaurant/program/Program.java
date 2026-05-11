@@ -6,6 +6,9 @@ import feluri.*;
 import clienti.*;
 import adapter.*;
 import facade.*;
+import notificari.*;
+import ocupare.*;
+import comenzi.*;
 
 public class Program {
 
@@ -64,5 +67,43 @@ public class Program {
         meniu.adaugaSubsectiune(deserturi);
 
         meniu.afisare();
+
+        Restaurant restaurant = new Restaurant();
+
+        ClientFidel cf1 = new ClientFidel("Ana");
+        ClientFidel cf2 = new ClientFidel("Ion");
+
+        restaurant.aboneaza(cf1);
+        restaurant.aboneaza(cf2);
+
+        restaurant.notifica("Oferta noua: 20% reducere la deserturi.");
+        restaurant.notifica("Meniu nou introdus in restaurant.");
+
+        OcupareMasa ocupare = new OcupareRestaurant();
+        ocupare.ocupaMasa();
+
+        Masa masa = new Masa(10);
+        Operator operator = new Operator();
+
+        Comanda cRez = new ComandaRezervare(masa);
+        Comanda cOcup = new ComandaOcupare(masa);
+
+        operator.trimiteComanda(cRez);
+        operator.trimiteComanda(cOcup);
+
+        Notificator sms = new NotificatorSMS();
+        Notificator email = new NotificatorEmail();
+        Notificator manager = new NotificatorManager();
+
+        sms.setUrmator(email);
+        email.setUrmator(manager);
+
+        ClientNotif n1 = new ClientNotif("Ana", "0711111111", "ana@gmail.com");
+        ClientNotif n2 = new ClientNotif("Ion", "", "ion@gmail.com");
+        ClientNotif n3 = new ClientNotif("Maria", "", "");
+
+        sms.notifica(n1, "Oferta noua la restaurant.");
+        sms.notifica(n2, "Oferta noua la restaurant.");
+        sms.notifica(n3, "Oferta noua la restaurant.");
     }
 }
