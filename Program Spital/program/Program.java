@@ -4,6 +4,9 @@ import pacient.*;
 import personal.*;
 import personalabstract.*;
 import retete.*;
+import adapter.*;
+import facade.*;
+import decorator.*;
 
 public class Program {
 
@@ -44,6 +47,23 @@ public class Program {
         pm2.afisare();
         pn1.afisare();
         pn2.afisare();
+
+        MedicamentSpital medSpital = new MedicamentSpital("Paracetamol");
+        IMedicamentFarmacie medFarmacie = new AdapterMedicament(medSpital);
+        medFarmacie.cumparaMedicament();
+
+        PacientInternare pacient = new PacientInternare("Ana", true);
+        MedicInternare medic = new MedicInternare();
+        Salon salon = new Salon(3);
+
+        FacadeInternare facade = new FacadeInternare(medic, salon);
+        facade.poateFiInternat(pacient);
+
+        IRezultat rezultatPrintat = new RezultatPrintat("Ana", "Analize bune");
+        rezultatPrintat.afiseazaRezultat();
+
+        IRezultat rezultatOnline = new RezultatOnline(rezultatPrintat);
+        rezultatOnline.afiseazaRezultat();
 
         Reteta r1 = new Reteta("Paracetamol", 10.5f, 20.3f, 5.7f);
         Reteta r2 = (Reteta) r1.copiaza();
